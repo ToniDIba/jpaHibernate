@@ -8,19 +8,12 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-
 public class Persona {
 
     @GeneratedValue
     @Id
     public int id_persona;
 
-    public String usuario;
-    public String password;
-    public String name;
-    public String surname;
-    public String company_email;
-    public String personal_email;
 
     public int getId_persona() {
         return id_persona;
@@ -118,6 +111,12 @@ public class Persona {
         this.termination_date = termination_date;
     }
 
+    public String usuario;
+    public String password;
+    public String name;
+    public String surname;
+    public String company_email;
+    public String personal_email;
     public String city;
     public boolean active;
     public Date created_date;

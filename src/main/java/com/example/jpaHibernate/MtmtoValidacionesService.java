@@ -8,17 +8,6 @@ import java.util.Optional;
 @Service
 public class MtmtoValidacionesService implements IvalidacionesService {
 
-/*
-    @Override
-    public Persona validarColumnas(Optional<String> usuario, Optional<String> password, Optional<String> name,
-                                   Optional<String> surname, Optional<String> company_email, Optional<String> personal_email,
-                                   Optional<String> city, Optional<Boolean> active, Optional<Date> created_date,
-                                   Optional<String> imagen_url, Optional<Date> termination_date) {
-
-        return new Persona();
-
-    } */
-
 
     @Override
     public String validarInfoPersona(Persona pers) {
@@ -35,16 +24,19 @@ public class MtmtoValidacionesService implements IvalidacionesService {
         System.out.println("termination:date: " + pers.getTermination_date());
         System.out.println("usuario: " + pers.getUsuario());
 
-        if(pers.getName() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
+        if(pers.getName() == null || pers.getName().length() == 0 ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
-        if(pers.getUsuario() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<< Usuario es null";
+        if(pers.getUsuario() == null || pers.getUsuario().length() == 0 ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<< Usuario es null";
         if(pers.getUsuario().length() < 6) return  " <<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario < 6";
         if(pers.getUsuario().length() > 10) return  "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario > 10";
-        if(pers.getPassword() == null) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Password es null";
-        if(pers.getPersonal_email() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Personal mail es null";
-        if(pers.getCompany_email() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Company mail es null";
-        if(pers.getCity() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< City es null";
-        if(pers.getCreated_date() == null ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
+
+        if(pers.getPassword() == null || pers.getPassword().length() == 0) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Password es null";
+        if(pers.getPersonal_email() == null || pers.getPersonal_email().length() == 0 ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Personal mail es null";
+        if(pers.getCompany_email() == null || pers.getCompany_email().length() == 0 ) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Company mail es null";
+        if(pers.getCity() == null || pers.getCity().length() == 0) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< City es null";
+
+
+        if(pers.getCreated_date() == null) return "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
         return "ok";
     }

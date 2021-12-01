@@ -1,15 +1,10 @@
 package com.example.jpaHibernate;
 
-
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
-
-
+import javax.persistence.*;
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -24,12 +19,38 @@ public class Controlador {
 
 
 
-    /* Retorna todos
+
+    /**
+     * En "R E S O U R C E S" tienes archivo "plantillaPersonaJSON.txt" con datos para insertar en la tabla
+     * Tras validarla, añade persona a la tabla
+     */
+
+    @PostMapping
+    public Persona anadirPersona(@RequestBody Persona persona) {
+
+        String resultado = validacionesService.validarInfoPersona(persona);
+
+        if (resultado.equals("ok")) {
+            personaRepositorio.save(persona);
+        } else {
+            persona.setName(resultado); //En "resultado" viene la descripción del error
+        }
+
+        return persona;
+    }
+
+
+
+
+
+    /**
+     * Retorna todas las personas existentes en la tabla
+     */
+
     @GetMapping("/todos")
-    public List<Persona> todasPersonas()
-    {
+    public List<Persona> todasPersonas() {
         return personaRepositorio.findAll();
-    } */
+    }
 
 
     @GetMapping("/{idOrName}")
@@ -37,80 +58,54 @@ public class Controlador {
 
         Optional<Integer> idParam = Optional.empty();
         Optional<String> nombreParam = Optional.empty();
+        String nombreBuscado = null;
 
         Persona persBuscada = null;
-
         idOrName = idOrName.trim();
 
 
-        //FastFail
-        if (idOrName.length() == 0) {
-            persBuscada = new Persona();
-            persBuscada.setSurname("No existe persona con este id / nombre: " + idOrName);
+        /**
+         * Extrae del parámetro de la URL, un numérico o un String para buscar por "Id" / "Nombre"
+         */
 
-        }
-        /* *
-         * Extrae de param "idOrName" un 'int' correspondiente al 'id', o un String correspondiente al nombre buscado
-         * */
         try {
-            idParam = Optional.ofNullable(Integer.parseInt(idOrName));
+            idParam = Optional.ofNullable(Integer.parseInt(idOrName));         // Busca por "Id"
             persBuscada = personaRepositorio.findById(idParam.get()).get();
-        } catch (NoSuchElementException e) {
+        } catch (NumberFormatException nfe) {
+
             nombreParam = Optional.ofNullable(idOrName);
+            nombreBuscado = nombreParam.get();                                //Busca por "Name"
 
-            /*@Query
-            persBuscada = personaRepositorio.findBy()*/
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
+            EntityManager em = emf.createEntityManager();
 
-            //persBuscada = personaRepositorio.fin
-        }
+            // cómo se haría con @Query ??
+            // cómo encaja @Native ??
+            TypedQuery<Persona> query = em.createQuery("SELECT p FROM Persona p WHERE p.name = '" + nombreBuscado + "'", Persona.class);
 
+            Persona personaBuscada = null;
+            try {
+                personaBuscada = query.getSingleResult();
 
-        if (Objects.isNull(persBuscada)) {
+                persBuscada = new Persona();
+                persBuscada.setName(personaBuscada.getName());
+                persBuscada.setPassword(personaBuscada.getPassword());
+                persBuscada.setUsuario(personaBuscada.getUsuario());
+
+            } catch (NoResultException nre) {   //Query no retorna nada
+                persBuscada = new Persona();
+                String mensaje = " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   No existe persona con este nombre: " + nombreBuscado;
+                persBuscada.setSurname(mensaje);
+            }
+
+        } catch (NoSuchElementException nse) {
             persBuscada = new Persona();
-
-            String mensaje = idParam.isPresent() ? " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   No existe persona con este id: " + idParam.get() :
-                    "No existe persona con este nombre: " + nombreParam;
+            String mensaje = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   No existe persona con este id: " + idParam.get();
             persBuscada.setSurname(mensaje);
         }
 
         return persBuscada;
 
-
-    }
-
-/*
-    @GetMapping("/{id_persona}")
-    public Persona buscaPersonaPorId (@PathVariable int id_persona) throws Exception {
-
-        Persona persBuscada = null;
-
-        try {
-            persBuscada = personaRepositorio.findById(id_persona).get();
-        }
-        catch (NoSuchElementException e) {
-            persBuscada = new Persona();
-            persBuscada.setSurname("No existe persona con este id: " + id_persona);
-        }
-
-        return persBuscada;
-    } */
-
-
-    @PostMapping
-    public Persona anadirPersona(@RequestBody Persona persona) {
-        System.out.println("Añadiendo persona con POST desde Controlador...");
-
-        String resultado = validacionesService.validarInfoPersona(persona);
-
-        if (resultado.equals("ok")) {
-            System.out.println("Validacion correcta");
-            personaRepositorio.save(persona);
-        } else {
-            persona.setName(resultado);
-        }
-
-
-        return persona;
     }
 
 }

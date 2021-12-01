@@ -1,0 +1,69 @@
+
+    "id_persona": 1,
+    "usuario": "usuario1",
+    "password": "pass1",
+    "name": "Toni",
+    "surname": "López",
+    "company_email": "empe1@gmail.com",
+    "personal_email": "nombre1@gmail.com",
+    "city": "Sabadell",
+    "active": true,
+    "created_date": "2021-01-01T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io11111/",
+    "termination_date": "2021-06-01T00:00:00.000+00:00"
+
+
+    "id_persona": 2,
+    "usuario": "usuario2",
+    "password": "pass2",
+    "name": "María",
+    "surname": "Quiroga",
+    "company_email": "empe2@gmail.com",
+    "personal_email": "nombre2@gmail.com",
+    "city": "Terrassa",
+    "active": false,
+    "created_date": "2021-02-02T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io22222/",
+    "termination_date": "2021-06-02T00:00:00.000+00:00"
+
+
+    "id_persona": 3,
+    "usuario": "usuario3",
+    "password": "pass3",
+    "name": "Sergio",
+    "surname": "Martín",
+    "company_email": "empe3@gmail.com",
+    "personal_email": "nombre3@gmail.com",
+    "city": "Argentona",
+    "active": true,
+    "created_date": "2021-03-03T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io33333/",
+    "termination_date": "2021-06-03T00:00:00.000+00:00"
+
+
+    "id_persona": 4,
+    "usuario": "usuario4",
+    "password": "pass4",
+    "name": "Carla",
+    "surname": "Andrade",
+    "company_email": "empe4@gmail.com",
+    "personal_email": "nombre4@gmail.com",
+    "city": "Teruel",
+    "active": false,
+    "created_date": "2021-04-04T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io44444/",
+    "termination_date": "2021-06-04T00:00:00.000+00:00"
+
+
+    "id_persona": 5,
+    "usuario": "usuario5",
+    "password": "pass5",
+    "name": "Manel",
+    "surname": "López",
+    "company_email": "empe5@gmail.com",
+    "personal_email": "nombre5@gmail.com",
+    "city": "Sarria",
+    "active": true,
+    "created_date": "2021-05-05T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io55555/",
+    "termination_date": "2021-06-05T00:00:00.000+00:00"
