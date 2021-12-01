@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface IvalidacionesService
 {
 
-    public Persona validarColumnas(Optional<String> usuario,
+    /*public Persona validarColumnas(Optional<String> usuario,
                                    Optional<String> password,
                                    Optional<String> name,
                                    Optional<String> surname,
@@ -16,7 +16,12 @@ public interface IvalidacionesService
                                    Optional<Boolean> active,
                                    Optional<Date> created_date,
                                    Optional<String> imagen_url,
-                                   Optional<Date> termination_date);
+                                   Optional<Date> termination_date);*/
+
+
+
+    public String validarInfoPersona(Persona pers);
+
 
 
 }

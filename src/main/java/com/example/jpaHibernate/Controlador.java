@@ -1,21 +1,15 @@
 package com.example.jpaHibernate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -29,44 +23,95 @@ public class Controlador {
     IvalidacionesService validacionesService;
 
 
+
     /* Retorna todos
-    @GetMapping
+    @GetMapping("/todos")
     public List<Persona> todasPersonas()
     {
         return personaRepositorio.findAll();
     } */
 
 
-   //@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
+    @GetMapping("/{idOrName}")
+    public Persona consultaPorNombreOrId(@PathVariable String idOrName) {
 
-    @GetMapping("/{id_persona}")
-    public Persona getById(@PathVariable int id_persona) throws Exception
-    {
-        Persona personaBuscada = new Persona();
-         personaBuscada = personaRepositorio.getById(id_persona);
+        Optional<Integer> idParam = Optional.empty();
+        Optional<String> nombreParam = Optional.empty();
 
-       // personaBuscada.setName(personaRepositorio.getById(id).getName());
-       // personaBuscada.setSurname(personaRepositorio.getById(id).getSurname());
+        Persona persBuscada = null;
+
+        idOrName = idOrName.trim();
 
 
-        return personaBuscada;
+        //FastFail
+        if (idOrName.length() == 0) {
+            persBuscada = new Persona();
+            persBuscada.setSurname("No existe persona con este id / nombre: " + idOrName);
+
+        }
+        /* *
+         * Extrae de param "idOrName" un 'int' correspondiente al 'id', o un String correspondiente al nombre buscado
+         * */
+        try {
+            idParam = Optional.ofNullable(Integer.parseInt(idOrName));
+            persBuscada = personaRepositorio.findById(idParam.get()).get();
+        } catch (NoSuchElementException e) {
+            nombreParam = Optional.ofNullable(idOrName);
+
+            /*@Query
+            persBuscada = personaRepositorio.findBy()*/
+
+            //persBuscada = personaRepositorio.fin
+        }
+
+
+        if (Objects.isNull(persBuscada)) {
+            persBuscada = new Persona();
+
+            String mensaje = idParam.isPresent() ? " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   No existe persona con este id: " + idParam.get() :
+                    "No existe persona con este nombre: " + nombreParam;
+            persBuscada.setSurname(mensaje);
+        }
+
+        return persBuscada;
+
 
     }
 
+/*
+    @GetMapping("/{id_persona}")
+    public Persona buscaPersonaPorId (@PathVariable int id_persona) throws Exception {
+
+        Persona persBuscada = null;
+
+        try {
+            persBuscada = personaRepositorio.findById(id_persona).get();
+        }
+        catch (NoSuchElementException e) {
+            persBuscada = new Persona();
+            persBuscada.setSurname("No existe persona con este id: " + id_persona);
+        }
+
+        return persBuscada;
+    } */
 
 
-
-
-    //    http://localhost:8080/h2-console/controlador/add
     @PostMapping
     public Persona anadirPersona(@RequestBody Persona persona) {
         System.out.println("Añadiendo persona con POST desde Controlador...");
-        //Persona resultValidacion =  validacionesService.validarColumnas(@RequestBody);
 
-        personaRepositorio.save(persona);
+        String resultado = validacionesService.validarInfoPersona(persona);
+
+        if (resultado.equals("ok")) {
+            System.out.println("Validacion correcta");
+            personaRepositorio.save(persona);
+        } else {
+            persona.setName(resultado);
+        }
+
+
         return persona;
     }
 
 }
-
 
