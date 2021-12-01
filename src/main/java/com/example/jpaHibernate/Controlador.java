@@ -1,11 +1,19 @@
 package com.example.jpaHibernate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import javax.persistence.*;
+import java.awt.print.Book;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
 
 
 @RestController
@@ -79,13 +87,25 @@ public class Controlador {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
             EntityManager em = emf.createEntityManager();
 
-            // cómo se haría con @Query ??
-            // cómo encaja @Native ??
+            /*-------------------------------------------------------------------------------------------------------
+            //Con @Query (ver clase "IpersonaRepositorio")
+            List<Persona> hallados = personaRepositorio.buscaPorNombre(nombreBuscado);
+            System.out.println("Hallados: " + hallados.get(0).getName() + " " + hallados.get(0).getUsuario());*/
+
+            //Select de otra forma:
             TypedQuery<Persona> query = em.createQuery("SELECT p FROM Persona p WHERE p.name = '" + nombreBuscado + "'", Persona.class);
+
+
 
             Persona personaBuscada = null;
             try {
+
                 personaBuscada = query.getSingleResult();
+
+                //Normalmente los DTO se hacen con más de una "entity"(tabla).
+                //Ver ejemplo en: https://www.arquitecturajava.com/jpa-dto-data-transfer-object-y-jpql/ (busca dentro "Enfoque diferente")
+                List<DatosPersonaDTO> lista=em.createQuery("select distinct new com.example.jpaHibernate.DatosPersonaDTO(p.name) from Persona p", DatosPersonaDTO.class).getResultList();
+                System.out.println("Con DTO: " + lista.get(0).getName());
 
                 persBuscada = new Persona();
                 persBuscada.setName(personaBuscada.getName());

@@ -42,9 +42,10 @@ public class DatosPersonaDTO {
     public String name;
 
 
-    public DatosPersonaDTO(String usuario, String password, String name) {
+    //public DatosPersonaDTO(String usuario, String password, String name) {
+    public DatosPersonaDTO(String name) {
         super();
-        this.usuario = usuario;
+        //this.usuario = usuario;
         this.password = password;
         this.name = name;
     }
