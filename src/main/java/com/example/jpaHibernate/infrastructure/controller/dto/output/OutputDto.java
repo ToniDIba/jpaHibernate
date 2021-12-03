@@ -1,20 +1,22 @@
-package com.example.jpaHibernate;
+package com.example.jpaHibernate.infrastructure.controller.dto.output;
 
-import lombok.Data;
-import org.springframework.context.annotation.Bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
-@Entity
-public class Persona {
+public class OutputDto {
 
-    @GeneratedValue
-    @Id
     public int id_persona;
-
+    public String usuario;
+    public String password;
+    public String name;
+    public String surname;
+    public String company_email;
+    public String personal_email;
+    public String city;
+    public boolean active;
+    public Date created_date;
+    public String imagen_url;
+    public Date termination_date;
 
     public int getId_persona() {
         return id_persona;
@@ -111,18 +113,6 @@ public class Persona {
     public void setTermination_date(Date termination_date) {
         this.termination_date = termination_date;
     }
-
-    public String usuario;
-    public String password;
-    public String name;
-    public String surname;
-    public String company_email;
-    public String personal_email;
-    public String city;
-    public boolean active;
-    public Date created_date;
-    public String imagen_url;
-    public Date termination_date;
 
 
 

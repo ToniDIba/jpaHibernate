@@ -1,4 +1,4 @@
-package com.example.jpaHibernate;
+package com.example.jpaHibernate.infrastructure.controller.dto.output;
 
 public class DatosPersonaDTO {
 

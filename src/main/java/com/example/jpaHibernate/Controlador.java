@@ -1,19 +1,17 @@
 package com.example.jpaHibernate;
 
+import com.example.jpaHibernate.content.application.port.IanadirPersona;
+import com.example.jpaHibernate.content.application.port.IbuscarTodos;
+import com.example.jpaHibernate.infrastructure.controller.dto.repository.jpa.IpersonaRepositorio;
+import com.example.jpaHibernate.content.application.port.IvalidacionesService;
+import com.example.jpaHibernate.infrastructure.controller.dto.input.InputDto;
+import com.example.jpaHibernate.infrastructure.controller.dto.output.DatosPersonaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
-
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 
 
 @RestController
@@ -25,40 +23,38 @@ public class Controlador {
     @Autowired
     IvalidacionesService validacionesService;
 
+    @Autowired
+    IanadirPersona anadirPersona;
+
+    @Autowired
+    IbuscarTodos ibuscarTodos;
 
 
 
-    /**
-     * En "R E S O U R C E S" tienes archivo "plantillaPersonaJSON.txt" con datos para insertar en la tabla
-     * Tras validarla, añade persona a la tabla
-     */
 
     @PostMapping
-    public Persona anadirPersona(@RequestBody Persona persona) {
+    public Persona anadirPersona(@RequestBody InputDto inputDto) {
 
-        String resultado = validacionesService.validarInfoPersona(persona);
-
-        if (resultado.equals("ok")) {
-            personaRepositorio.save(persona);
-        } else {
-            persona.setName(resultado); //En "resultado" viene la descripción del error
-        }
-
-        return persona;
+        Persona miPers = validacionesService.mapearInputOutput(inputDto);
+        anadirPersona.anyadirPersona(miPers);
+        return miPers;
     }
-
 
 
 
 
     /**
      * Retorna todas las personas existentes en la tabla
+     * @return
      */
 
     @GetMapping("/todos")
     public List<Persona> todasPersonas() {
-        return personaRepositorio.findAll();
+        return ibuscarTodos.buscarTodos();
+
     }
+
+
 
 
     @GetMapping("/{idOrName}")
@@ -68,6 +64,7 @@ public class Controlador {
         Optional<String> nombreParam = Optional.empty();
         String nombreBuscado = null;
 
+        //Persona persBuscada = null;
         Persona persBuscada = null;
         idOrName = idOrName.trim();
 
@@ -84,15 +81,14 @@ public class Controlador {
             nombreParam = Optional.ofNullable(idOrName);
             nombreBuscado = nombreParam.get();                                //Busca por "Name"
 
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
-            EntityManager em = emf.createEntityManager();
-
             /*-------------------------------------------------------------------------------------------------------
             //Con @Query (ver clase "IpersonaRepositorio")
             List<Persona> hallados = personaRepositorio.buscaPorNombre(nombreBuscado);
             System.out.println("Hallados: " + hallados.get(0).getName() + " " + hallados.get(0).getUsuario());*/
 
-            //Select de otra forma:
+            //Select de otra forma: (necesitas archivo "persistence.xml" dentro de resources/META-INF
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
+            EntityManager em = emf.createEntityManager();
             TypedQuery<Persona> query = em.createQuery("SELECT p FROM Persona p WHERE p.name = '" + nombreBuscado + "'", Persona.class);
 
 
@@ -104,7 +100,7 @@ public class Controlador {
 
                 //Normalmente los DTO se hacen con más de una "entity"(tabla).
                 //Ver ejemplo en: https://www.arquitecturajava.com/jpa-dto-data-transfer-object-y-jpql/ (busca dentro "Enfoque diferente")
-                List<DatosPersonaDTO> lista=em.createQuery("select distinct new com.example.jpaHibernate.DatosPersonaDTO(p.name) from Persona p", DatosPersonaDTO.class).getResultList();
+                List<DatosPersonaDTO> lista=em.createQuery("select distinct new com.example.jpaHibernate.infrastructure.controller.dto.output.DatosPersonaDTO(p.name) from Persona p", DatosPersonaDTO.class).getResultList();
                 System.out.println("Con DTO: " + lista.get(0).getName());
 
                 persBuscada = new Persona();
