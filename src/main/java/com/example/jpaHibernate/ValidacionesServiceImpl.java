@@ -2,11 +2,14 @@ package com.example.jpaHibernate;
 
 import com.example.jpaHibernate.content.application.port.IvalidacionesService;
 import com.example.jpaHibernate.infrastructure.controller.dto.input.InputDto;
+import org.springframework.data.mapping.model.IdPropertyIdentifierAccessor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
-public class MtmtoValidacionesService implements IvalidacionesService {
+public class ValidacionesServiceImpl implements IvalidacionesService {
 
 
     @Override
@@ -46,12 +49,12 @@ public class MtmtoValidacionesService implements IvalidacionesService {
 
         if (pers.getCreated_date() == null) resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
-        if(!resu.equals("ok")) {
+        if (!resu.equals("ok")) {
             NullPointerException nullPointer = new NullPointerException("Error controlado");
             throw nullPointer;
         }
 
-       // return new Persona();
+        // return new Persona();
     }
 
 
@@ -74,6 +77,30 @@ public class MtmtoValidacionesService implements IvalidacionesService {
 
         return persona;
 
+
+    }
+
+    @Override
+    public String retornarIdOrName(String idOrName) {
+
+        Optional<Integer> idParam = Optional.empty();
+        Optional<String> nombreParam;
+
+        idOrName = idOrName.trim();
+        String nombreBuscado = null;
+
+        try {
+            idParam = Optional.ofNullable(Integer.parseInt(idOrName));         // Busca por "Id";
+        } catch (NumberFormatException nfe) {
+            nombreParam = Optional.ofNullable(idOrName);
+            nombreBuscado = nombreParam.get();                                //Busca por "Name"
+        }
+
+        if (idParam.isPresent()) {
+            return idParam.get().toString();
+        } else {
+            return nombreBuscado;
+        }
 
     }
 }

@@ -13,6 +13,7 @@ public interface IvalidacionesService
 
     public Persona mapearInputOutput(InputDto inputDto);
 
+    String retornarIdOrName(String idOrName);
 }
 
 

@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MtmtoBuscarTodosRepository implements IbuscarTodos {
+public class BuscarTodosImplRepository implements IbuscarTodos {
 
     @Autowired
     IpersonaRepositorio personaRepositorio;
+
+
 
     @Override
     public List<Persona> buscarTodos() {
