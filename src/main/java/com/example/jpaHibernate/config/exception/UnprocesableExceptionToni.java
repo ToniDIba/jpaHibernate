@@ -3,14 +3,11 @@ package com.example.jpaHibernate.config.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-
+@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 
 //Cumplimentar la clase ...ExceptionHandler
-public class NotFoundExceptionToni extends RuntimeException
-{
-
- public NotFoundExceptionToni(String message) {
+public class UnprocesableExceptionToni extends RuntimeException {
+public UnprocesableExceptionToni(String message) {
         super(message);
     }
 

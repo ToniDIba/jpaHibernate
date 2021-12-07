@@ -10,12 +10,12 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-
-
+import javax.persistence.NoResultException;
 import java.util.Date;
 
 @RestControllerAdvice
 public class MiResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+
 
     @ExceptionHandler(NotFoundExceptionToni.class)
     public final ResponseEntity<CustomError> handleNotFoundException(NotFoundExceptionToni ex) {
@@ -25,12 +25,26 @@ public class MiResponseEntityExceptionHandler extends ResponseEntityExceptionHan
 
     }
 
-    @ExceptionHandler(HttpClientErrorException.UnprocessableEntity.class)
-    public final ResponseEntity<CustomError> handleNotFoundException(HttpClientErrorException.UnprocessableEntity un) {
 
-        CustomError exceptionResponse = new CustomError(new Date(), un.getMessage(), 422);
+
+    @ExceptionHandler(UnprocesableExceptionToni.class)
+    public final ResponseEntity<CustomError> handleNotFoundException(UnprocesableExceptionToni ex) {
+
+        CustomError exceptionResponse = new CustomError(new Date(), ex.getMessage(), 422);
         return new ResponseEntity<CustomError>(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
 
     }
+
+/* sergi
+    @ExceptionHandler(NoResultException.class)
+    public final ResponseEntity<CustomError> handleNotFoundException(NoResultException ex) {
+
+        CustomError exceptionResponse = new CustomError(new Date(), ex.getMessage(), 422);
+        return new ResponseEntity<CustomError>(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+
+    } */
+
+
+
 
 }

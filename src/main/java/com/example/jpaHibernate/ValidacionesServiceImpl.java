@@ -30,24 +30,32 @@ public class ValidacionesServiceImpl implements IvalidacionesService {
         System.out.println("termination:date: " + pers.getTermination_date());
         System.out.println("usuario: " + pers.getUsuario());
 
-        if (pers.getName() == null || pers.getName().length() == 0) resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
+        if (pers.getName() == null || pers.getName().length() == 0)
+            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
         if (pers.getUsuario() == null || pers.getUsuario().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<< Usuario es null";
-        if (pers.getUsuario().length() < 6) resu = " <<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario < 6";
-        if (pers.getUsuario().length() > 10) resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario > 10";
+
+        if (pers.getUsuario().length() < 6)
+            resu = " <<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario < 6";
+
+        if (pers.getUsuario().length() > 10)
+            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario > 10";
 
         if (pers.getPassword() == null || pers.getPassword().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Password es null";
+
         if (pers.getPersonal_email() == null || pers.getPersonal_email().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Personal mail es null";
+
         if (pers.getCompany_email() == null || pers.getCompany_email().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Company mail es null";
+
         if (pers.getCity() == null || pers.getCity().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< City es null";
 
-
-        if (pers.getCreated_date() == null) resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
+        if (pers.getCreated_date() == null)
+            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
         if (!resu.equals("ok")) {
             NullPointerException nullPointer = new NullPointerException("Error controlado");
@@ -60,22 +68,22 @@ public class ValidacionesServiceImpl implements IvalidacionesService {
 
     public Persona mapearInputOutput(InputDto inputDto) {
 
-        Persona persona = new Persona();
+        Persona personaOut = new Persona();
 
-        persona.setId_persona(inputDto.getId_persona());
-        persona.setUsuario(inputDto.getUsuario());
-        persona.setPassword(inputDto.getPassword());
-        persona.setName(inputDto.getName());
-        persona.setSurname(inputDto.getSurname());
-        persona.setCompany_email(inputDto.getCompany_email());
-        persona.setPersonal_email(inputDto.getPersonal_email());
-        persona.setCity(inputDto.getCity());
-        persona.setActive(true);
-        persona.setCreated_date(inputDto.getCreated_date());
-        persona.setImagen_url(inputDto.getImagen_url());
-        persona.setTermination_date(inputDto.getTermination_date());
+        personaOut.setId_persona(inputDto.getId_persona());
+        personaOut.setUsuario(inputDto.getUsuario());
+        personaOut.setPassword(inputDto.getPassword());
+        personaOut.setName(inputDto.getName());
+        personaOut.setSurname(inputDto.getSurname());
+        personaOut.setCompany_email(inputDto.getCompany_email());
+        personaOut.setPersonal_email(inputDto.getPersonal_email());
+        personaOut.setCity(inputDto.getCity());
+        personaOut.setActive(true);
+        personaOut.setCreated_date(inputDto.getCreated_date());
+        personaOut.setImagen_url(inputDto.getImagen_url());
+        personaOut.setTermination_date(inputDto.getTermination_date());
 
-        return persona;
+        return personaOut;
 
 
     }

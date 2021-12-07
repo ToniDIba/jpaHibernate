@@ -25,14 +25,11 @@ public class AddController {
     IanadirPersona anadirPersona;
 
 
-
-
-
     @PostMapping
     public Persona anadirPersona(@RequestBody InputDto inputDto) {
 
         Persona miPers = validacionesService.mapearInputOutput(inputDto);
-        anadirPersona.anyadirPersona(miPers);
+        anadirPersona.anyadirPersona(miPers); //Hace un Repository.add
         return miPers;
     }
 

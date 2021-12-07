@@ -4,10 +4,8 @@ import com.example.jpaHibernate.Persona;
 
 public interface IBuscarPersona {
 
-    public Persona buscarPersona(String name);
-
+    //Cumplimentar la clase ...ExceptionHandler
     public Persona buscarPersonaId(String id) throws Exception;
-
-
+    public Persona buscarPersona(String name) throws Exception;;
 
 }

@@ -40,8 +40,7 @@ public class ConsultaPersonaController {
         String claveBusqueda = validacionesService.retornarIdOrName(idOrName);
 
 
-        //if(isNumeric(claveBusqueda)) {
-        if(claveBusqueda.equals("1") || claveBusqueda.equals("2") || claveBusqueda.equals("3") ) {
+        if(isNumeric(claveBusqueda)) {
              persBuscada = buscarPersona.buscarPersonaId(claveBusqueda); //Busca por id numérico
         }
         else {
@@ -52,6 +51,12 @@ public class ConsultaPersonaController {
         return persBuscada;
 
     }
+
+    public static boolean isNumeric(String str)
+    {
+        return str != null && str.matches("[-+]?\\d*\\.?\\d+");
+    }
+
 
 
 }
