@@ -40,4 +40,11 @@ public class CustomError {
     }
 
 
+    public CustomError(Date timeStamp, String mensaje) {
+        super();
+        this.timeStamp = timeStamp;
+        this.mensaje = mensaje;
+    }
+
+
 }

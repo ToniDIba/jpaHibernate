@@ -10,7 +10,7 @@ import com.example.jpaHibernate.student.domain.Student;
 
 public interface IvalidacionesStudentService
 {
-    public void validarInfoStudent(Student student);
+    public String validarInfoStudent(Student student);
 
     //public Persona mapearInputOutput(InputDto inputDto);
 

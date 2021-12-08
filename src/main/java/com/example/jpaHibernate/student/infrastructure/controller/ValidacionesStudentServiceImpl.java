@@ -10,14 +10,13 @@ import java.util.Optional;
 
 
 @Service
-public class ValidacionesServiceImpl implements IvalidacionesStudentService {
+public class ValidacionesStudentServiceImpl implements IvalidacionesStudentService {
 
 
     @Override
-    //public void validarInfoPersona(InputDto inputDto) {
-    public void validarInfoStudent(Student student) {
+    public String validarInfoStudent(Student student) {
 
-        String resu = "ok";
+        String resu = "Ok";
 
         System.out.println("id_persona : " + student.getId_persona());
         System.out.println("id_student: " + student.getId_student());
@@ -27,39 +26,19 @@ public class ValidacionesServiceImpl implements IvalidacionesStudentService {
         System.out.println("initial branch : " + student.getBranch());
 
 
-       /*if (student.getName() == null || student.getName().length() == 0)
+        if (student.getBranch () == null || student.getBranch().length() == 0)
             resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
 
-        if (student.getUsuario() == null || student.getUsuario().length() == 0)
-            resu = "<<<<<<<<<<<<<<<<<<<<< Usuario es null";
+        if (student.getId_profesor() == "")
+            resu = "<<<<<<<<<<<<<<<<<<<<< Id Profesor es cero";
 
-        if (student.getUsuario().length() < 6)
-            resu = " <<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario < 6";
+        //if (student.getId_student().length() < 3)
+        //    resu = " <<<<<<<<<<<<<<<<<<<<<<<<<<<<< id usuario < 3";
 
-        if (student.getUsuario().length() > 10)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< usuario > 10";
+        if (student.getNum_hours_week() < 10)
+            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Horas semanales < 10";
 
-        if (student.getPassword() == null || student.getPassword().length() == 0)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Password es null";
-
-        if (student.getPersonal_email() == null || student.getPersonal_email().length() == 0)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Personal mail es null";
-
-        if (student.getCompany_email() == null || student.getCompany_email().length() == 0)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Company mail es null";
-
-        if (student.getCity() == null || student.getCity().length() == 0)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< City es null";
-
-        if (student.getCreated_date() == null)
-            resu = "<<<<<<<<<<<<<<<<<<<<<<<<<<<< Name es null";
-
-        if (!resu.equals("ok")) {
-            NullPointerException nullPointer = new NullPointerException("Error controlado");
-            throw nullPointer;
-        }*/
-
-        // return new Persona();
+         return resu;
     }
 
 

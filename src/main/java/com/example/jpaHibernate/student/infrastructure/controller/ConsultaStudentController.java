@@ -4,6 +4,9 @@ import com.example.jpaHibernate.persona.application.port.IBuscarPersona;
 import com.example.jpaHibernate.persona.application.port.IvalidacionesService;
 import com.example.jpaHibernate.persona.domain.IpersonaRepositorio;
 import com.example.jpaHibernate.persona.domain.Persona;
+import com.example.jpaHibernate.student.application.port.IBuscarStudent;
+import com.example.jpaHibernate.student.application.port.IvalidacionesStudentService;
+import com.example.jpaHibernate.student.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,30 +21,30 @@ public class ConsultaStudentController {
     IpersonaRepositorio personaRepositorio;
 
     @Autowired
-    IvalidacionesService validacionesService;
+    IvalidacionesStudentService validacionesStudentService;
 
     @Autowired
-    IBuscarPersona buscarPersona;
+    IBuscarStudent buscarStudent;
 
 
 
-    @GetMapping("/id/{idOrName}")
-    public Persona consultaPorNombreOrId(@PathVariable String idOrName) throws Exception
+    @GetMapping("/student/id/{idOrName}")
+    public Student consultaPorNombreOrId(@PathVariable String idOrName) throws Exception
     {
 
-        Persona persBuscada = null;
-        String claveBusqueda = validacionesService.retornarIdOrName(idOrName);
+        Student studentBuscado = null;
+        String claveBusqueda = validacionesStudentService.retornarIdOrName(idOrName);
 
 
         if(isNumeric(claveBusqueda)) {
-             persBuscada = buscarPersona.buscarPersonaId(claveBusqueda); //Busca por id numérico
+             studentBuscado = buscarStudent.buscarStudentId(claveBusqueda); //Busca por id numérico
         }
         else {
-            persBuscada = buscarPersona.buscarPersona(claveBusqueda);  //Busca por nombre persona
+            studentBuscado = buscarStudent.buscarStudent(claveBusqueda);  //Busca por nombre persona
         }
 
 
-        return persBuscada;
+        return studentBuscado;
 
     }
 

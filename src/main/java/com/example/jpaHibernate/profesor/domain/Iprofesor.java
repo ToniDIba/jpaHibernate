@@ -1,4 +1,9 @@
 package com.example.jpaHibernate.profesor.domain;
 
-public interface IProfesorRepositorio {
+public interface Iprofesor {
+
+
+
+
+
 }

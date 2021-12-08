@@ -1,0 +1,23 @@
+
+
+ "id_profesor": "PROF-001", <<<< lo genera la maquina
+
+{
+ 
+   
+    "id_persona": "1",
+    "id_profesor": "100",
+
+    
+    }
+    
+    
+    
+    {
+      
+       "id_persona": "2",
+       "id_profesor": "200",
+
+        
+    }    
+

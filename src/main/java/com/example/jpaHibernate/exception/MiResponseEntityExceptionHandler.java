@@ -33,6 +33,21 @@ public class MiResponseEntityExceptionHandler extends ResponseEntityExceptionHan
 
     }
 
+
+
+    @ExceptionHandler(BadValidationToni.class)
+    public final ResponseEntity<CustomError> handleNotFoundException(BadValidationToni ex) {
+
+        CustomError exceptionResponse = new CustomError(new Date(), ex.getMessage());
+        return new ResponseEntity<CustomError>(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
+
+    }
+
+
+
+
+
+
 /* sergi
     @ExceptionHandler(NoResultException.class)
     public final ResponseEntity<CustomError> handleNotFoundException(NoResultException ex) {
