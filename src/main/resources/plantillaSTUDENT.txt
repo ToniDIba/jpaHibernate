@@ -1,7 +1,7 @@
 
 
  "id_student": "AUTO-001", <<<< lo genera la maquina
-
+ @PostMapping("/addStudent")
 {
  
    

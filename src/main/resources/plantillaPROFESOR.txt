@@ -6,7 +6,7 @@
  
    
     "id_persona": "1",
-    "id_profesor": "100",
+    "id_profesor": "100"
 
     
     }
@@ -16,7 +16,7 @@
     {
       
        "id_persona": "2",
-       "id_profesor": "200",
+       "id_profesor": "200"
 
         
     }    

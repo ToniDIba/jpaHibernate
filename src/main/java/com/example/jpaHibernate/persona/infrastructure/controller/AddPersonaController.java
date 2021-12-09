@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class AddController {
+public class AddPersonaController {
 
 
     @Autowired
@@ -19,16 +19,13 @@ public class AddController {
     IanadirPersona anadirPersona;
 
 
-    @PostMapping
+    @PostMapping("/addPersona")
     public Persona anadirPersona(@RequestBody InputDto inputDto) {
 
         Persona miPers = validacionesService.mapearInputOutput(inputDto);
         anadirPersona.anyadirPersona(miPers); //Hace un Repository.add
         return miPers;
     }
-
-
-
 
 
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Service
-public class ValidacionesServiceImpl implements IvalidacionesService {
+public class ValidacionesPersServiceImpl implements IvalidacionesService {
 
 
     @Override
