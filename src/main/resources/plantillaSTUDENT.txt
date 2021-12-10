@@ -1,14 +1,15 @@
 
 
- "id_student": "AUTO-001", <<<< lo genera la maquina
+ "id_student": "STUD-001", <<<< lo genera la maquina
  @PostMapping("/addStudent")
 {
  
    
-    "id_persona": "1",
+    "id_persona": "3",
+    "id_student" : "1",
     "num_hours_week": 20,
     "comments": "No comment",
-    "id_profesor": "100",
+    "id_profesor": "PROF-001",
     "branch": "fullStack"
     
     
@@ -18,11 +19,21 @@
     
     {
       
-        "id_persona": "2",
+        "id_persona": "4",
         "num_hours_week": 40,
         "comments": "No comment 2",
-        "id_profesor": "200",
+        "id_profesor": "PROF-001",
         "branch": "HalfStack"
+
+
+
+
+
+               "id_persona": "5",
+                "num_hours_week": 25,
+                "comments": "No comment studnt 3",
+                "id_profesor": "PROF-002",
+                "branch": "HalfStack"
         
         
     }    

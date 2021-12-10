@@ -4,6 +4,8 @@ import com.example.jpaHibernate.exception.NotFoundExceptionToni;
 import com.example.jpaHibernate.persona.application.port.IBuscarPersona;
 import com.example.jpaHibernate.persona.domain.IpersonaRepositorio;
 import com.example.jpaHibernate.persona.domain.Persona;
+import com.example.jpaHibernate.profesor.domain.IprofesorRepositorio;
+import com.example.jpaHibernate.profesor.domain.Profesor;
 import com.example.jpaHibernate.student.application.port.IBuscarStudent;
 import com.example.jpaHibernate.student.domain.IstudentRepositorio;
 import com.example.jpaHibernate.student.domain.Student;
@@ -20,16 +22,22 @@ public class BuscarStudentImplRepository implements IBuscarStudent {
     @Autowired
     IstudentRepositorio studentRepositorio;
 
+    @Autowired
+    IprofesorRepositorio profesorRepositorio;
+
 
     Student student = new Student();
+    Profesor profesor = new Profesor();
+
+
     Persona personaBuscada = new Persona();
 
 
 
     @Override
-    public Student buscarStudentId(String id) throws Exception  //Busca por número id
+    public Student buscarStudentId(String id_student) throws Exception  //Busca por número id
     {
-         student = studentRepositorio.findById(student.id_student).orElseThrow(() -> new NotFoundExceptionToni("Student. No encuentro id: " + id));
+        student = studentRepositorio.findById(id_student).orElseThrow(() -> new NotFoundExceptionToni("Student. No encuentro id: " + id_student));
         return student;
     }
 

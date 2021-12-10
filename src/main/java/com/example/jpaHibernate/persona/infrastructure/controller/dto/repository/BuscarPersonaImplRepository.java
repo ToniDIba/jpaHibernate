@@ -38,7 +38,7 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
 
 
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
+       /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
         EntityManager em = emf.createEntityManager();
         TypedQuery<Persona> query = em.createQuery("SELECT p FROM Persona p WHERE p.name = '" + nombreBuscado + "'", Persona.class);
 
@@ -51,9 +51,10 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
 
         } catch (NoResultException nre) {
             throw new NotFoundExceptionToni("No encuentro este nombre: " + nombreBuscado);
-        }
+        } */
 
-        return personaBuscada;
+        //return personaBuscada; original era este
+        return pers;
     }
 
 

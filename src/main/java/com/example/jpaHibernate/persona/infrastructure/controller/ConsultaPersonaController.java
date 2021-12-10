@@ -16,8 +16,7 @@ import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeri
 public class ConsultaPersonaController {
 
 
-    @Autowired
-    IpersonaRepositorio personaRepositorio;
+
 
     @Autowired
     IvalidacionesService validacionesService;

@@ -28,9 +28,9 @@ public class BuscarProfesorImplRepository implements IBuscarProfesor {
 
 
     @Override
-    public Profesor buscarProfesorId(String id) throws Exception
+    public Profesor buscarProfesorId(String id_profesor) throws Exception
     {
-        profesor = profesorRepositorio.findById(profesor.id_profesor).orElseThrow(() -> new NotFoundExceptionToni("Profesor. No encuentro id: " + id));
+        profesor = profesorRepositorio.findById(id_profesor).orElseThrow(() -> new NotFoundExceptionToni("Profesor. No encuentro id: " + id_profesor));
         return profesor;
     }
 

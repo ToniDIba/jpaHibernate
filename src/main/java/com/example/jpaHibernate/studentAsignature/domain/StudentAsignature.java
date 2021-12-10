@@ -1,17 +1,17 @@
 package com.example.jpaHibernate.studentAsignature.domain;
 
 import com.example.jpaHibernate.student.infrastructure.controller.StringPrefixedSequenceIdGenerator;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 @Entity
+@Data
 public class StudentAsignature  {
 
     @Id
@@ -27,56 +27,19 @@ public class StudentAsignature  {
 
     public String id_asignatura; // Primarykey autoIncremento
 
+    //@OneToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "id_persona", insertable = false, updatable = false)
+    // Persona persona;
 
 
+    // @OneToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "id_profesor" , insertable = false, updatable = false)
+    // Profesor profesor;
 
-    public String getId_asignatura() {
-        return id_asignatura;
-    }
 
-    public void setId_asignatura(String id_asignatura) {
-        this.id_asignatura = id_asignatura;
-    }
-
-    public String getId_student() {
-        return id_student;
-    }
-
-    public void setId_student(String id_student) {
-        this.id_student = id_student;
-    }
-
-    public String getNombreAsignatura() {
-        return nombreAsignatura;
-    }
-
-    public void setNombreAsignatura(String nombreAsignatura) {
-        this.nombreAsignatura = nombreAsignatura;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public Date getInitial_date() {
-        return initial_date;
-    }
-
-    public void setInitial_date(Date initial_date) {
-        this.initial_date = initial_date;
-    }
-
-    public Date getFinish_date() {
-        return finish_date;
-    }
-
-    public void setFinish_date(Date finish_date) {
-        this.finish_date = finish_date;
-    }
+    //@OneToMany(mappedBy = "id_student")
+    // StudentAsignature studentAsignature;
+    // private ArrayList<StudentAsignature> items = new ArrayList<StudentAsignature>();
 
 
     public String id_student;

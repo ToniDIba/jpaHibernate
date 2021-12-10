@@ -1,11 +1,9 @@
 package com.example.jpaHibernate.profesor.infrastructure.controller;
 
-import com.example.jpaHibernate.persona.domain.IpersonaRepositorio;
+import com.example.jpaHibernate.profesor.application.mappers.IprofesorService;
 import com.example.jpaHibernate.profesor.application.port.IBuscarProfesor;
-import com.example.jpaHibernate.profesor.application.port.IvalidacionesProfesorService;
 import com.example.jpaHibernate.profesor.domain.Profesor;
-import com.example.jpaHibernate.student.application.port.IBuscarStudent;
-import com.example.jpaHibernate.student.application.port.IvalidacionesStudentService;
+import com.example.jpaHibernate.student.application.mappers.DtoProfesorStudent;
 import com.example.jpaHibernate.student.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +18,43 @@ public class ConsultaProfesorController {
     @Autowired
     IBuscarProfesor buscarProfesor;
 
+    @Autowired
+    IprofesorService profesorService;
+
 
     @GetMapping("/profesor/id/{id}")
-    public Profesor consultaPorId(@PathVariable String id) throws Exception {
+    public DtoProfesorStudent consultaPorId(@PathVariable String idProfesor) throws Exception {
 
-        Profesor profesorBuscado = null;
+        System.out.println("entra");
 
-        profesorBuscado = buscarProfesor.buscarProfesorId(id);
-        return profesorBuscado;
+        //Profesor profesorBuscado = null;
+        //profesorBuscado = buscarProfesor.buscarProfesorId(id);
+        //return profesorBuscado
+
+
+        Profesor profesorBuscado = buscarProfesor.buscarProfesorId(idProfesor);
+        Student student = profesorBuscado.getStudent();
+
+        DtoProfesorStudent miDto = profesorService.convertirDtoPs(profesorBuscado, student);
+        //studentBuscado
+
+        return miDto;
     }
-
-
-    public static boolean isNumeric(String str) {
-        return str != null && str.matches("[-+]?\\d*\\.?\\d+");
-    }
-
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,14 @@
 
-
+@GetMapping("/profesor/id/{id}")
  "id_profesor": "PROF-001", <<<< lo genera la maquina
 
 {
  
    
     "id_persona": "1",
-    "id_profesor": "100"
+    "id_profesor": "PROF-001",
+    "comments" : "comentario prof 1",
+    "asignatura" : "FullStack"
 
     
     }
@@ -15,8 +17,11 @@
     
     {
       
-       "id_persona": "2",
-       "id_profesor": "200"
+    "id_persona": "2",
+    "id_profesor": "PROF-002",
+    "comments" : "comentario prof 2",
+    "asignatura" : "Agular"
+
 
         
     }    
