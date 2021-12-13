@@ -1,5 +1,6 @@
 package com.example.jpaHibernate.student.application.mappers;
 
+import com.example.jpaHibernate.persona.domain.Persona;
 import com.example.jpaHibernate.profesor.application.mappers.DtoStudentProfesor;
 import com.example.jpaHibernate.profesor.domain.Profesor;
 import com.example.jpaHibernate.student.domain.Student;
@@ -24,9 +25,52 @@ public class StudentService implements IStudentService {
         salidaDtoSp.setSt_num_hours_week(st.getNum_hours_week());
         salidaDtoSp.setSt_comments(st.getComments());
         salidaDtoSp.setSt_branch(st.getBranch());
-
+        salidaDtoSp.setListaAsignaturas(st.getStudentasignaturas());
 
         return salidaDtoSp;
+    }
+
+    @Override
+    public DtoRetorno crearDtoSimple(Student st) {
+
+        DtoRetorno salidaDtoSimple = new DtoRetorno();
+
+        salidaDtoSimple.setSt_branch(st.getBranch());
+        salidaDtoSimple.setSt_comments(st.getComments());
+        salidaDtoSimple.setSt_num_hours_week(st.getNum_hours_week());
+        salidaDtoSimple.setSt_id_profesor(st.getId_profesor());
+        salidaDtoSimple.setSt_id_student(st.getId_student());
+        salidaDtoSimple.setSt_id_persona(st.getId_persona());
+
+        return salidaDtoSimple;
+    }
+
+
+
+    @Override
+    public DtoRetorno crearDtoFull(Student st, Persona pers) {
+
+        DtoRetorno salidaDtoFull = new DtoRetorno();
+
+        salidaDtoFull.setSt_branch(st.getBranch());
+        salidaDtoFull.setSt_comments(st.getComments());
+        salidaDtoFull.setSt_num_hours_week(st.getNum_hours_week());
+        salidaDtoFull.setSt_id_profesor(st.getId_profesor());
+        salidaDtoFull.setSt_id_student(st.getId_student());
+        salidaDtoFull.setSt_id_persona(st.getId_persona());
+
+        salidaDtoFull.setPers_usuario(pers.getUsuario());
+        salidaDtoFull.setPers_password(pers.getPassword());
+        salidaDtoFull.setPers_name(pers.getName());
+        salidaDtoFull.setPers_surname(pers.getSurname());
+        salidaDtoFull.setPers_company_email(pers.getCompany_email());
+        salidaDtoFull.setPers_personal_email(pers.getCompany_email());
+        salidaDtoFull.setPers_city(pers.getCity());
+        salidaDtoFull.setPers_created_date(pers.getCreated_date());
+        salidaDtoFull.setPers_imagen_url(pers.getImagen_url());
+        salidaDtoFull.setPers_termination_date(pers.getTermination_date());
+
+        return salidaDtoFull;
     }
 
 

@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -38,9 +39,10 @@ public class Profesor {
     Persona persona;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profesor" , insertable = false, updatable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_profesor")
+    private List<Student> lines;
+    @ManyToOne
+    @JoinColumn(name = "student_id_student")
     Student student;
 
 

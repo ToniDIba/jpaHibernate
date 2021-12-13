@@ -1,6 +1,9 @@
 package com.example.jpaHibernate.profesor.application.mappers;
 
+import com.example.jpaHibernate.studentAsignature.domain.StudentAsignature;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class DtoStudentProfesor {
@@ -16,5 +19,7 @@ public class DtoStudentProfesor {
     public int st_num_hours_week;
     public String st_comments;
     public String st_branch;
+
+    public List<StudentAsignature> listaAsignaturas;
 
 }

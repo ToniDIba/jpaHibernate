@@ -11,12 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
 
-
 @RestController
 public class ConsultaPersonaController {
-
-
-
 
     @Autowired
     IvalidacionesService validacionesService;
@@ -24,12 +20,10 @@ public class ConsultaPersonaController {
     @Autowired
     IBuscarPersona buscarPersona;
 
-
-
     @GetMapping("/id/{idOrName}")
     public Persona consultaPorNombreOrId(@PathVariable String idOrName) throws Exception
     {
-
+        System.out.println("Paso por consultar persona");
         Persona persBuscada = null;
         String claveBusqueda = validacionesService.retornarIdOrName(idOrName);
 
@@ -41,7 +35,6 @@ public class ConsultaPersonaController {
             persBuscada = buscarPersona.buscarPersona(claveBusqueda);  //Busca por nombre persona
         }
 
-
         return persBuscada;
 
     }
@@ -50,7 +43,6 @@ public class ConsultaPersonaController {
     {
         return str != null && str.matches("[-+]?\\d*\\.?\\d+");
     }
-
 
 
 }

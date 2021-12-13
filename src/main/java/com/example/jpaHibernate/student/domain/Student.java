@@ -43,30 +43,28 @@ public class Student  {
     public String id_student;
 
 
-   @OneToOne(fetch = FetchType.LAZY)
+   @OneToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "id_persona", insertable = false, updatable = false)
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    Persona persona;
 
 
-   @OneToOne(fetch = FetchType.LAZY)
+   @OneToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "id_profesor" , insertable = false, updatable = false)
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    Profesor profesor;
 
 
-    //@OneToMany(mappedBy = "id_student")
-    //StudentAsignature studentAsignature;
-   //private List<StudentAsignature> asignaturasStudent = new ArrayList<StudentAsignature>();
-/*
-    @OneToMany(cascade=CascadeType.ALL, targetEntity=StudentAsignature.class)
-    @JoinColumn(name="id_student")
-    public List<StudentAsignature> asignaturasStudent = new ArrayList<StudentAsignature>();  */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_student")
+    public List<StudentAsignature> Studentasignaturas;
+    @ManyToOne
+    @JoinColumn(name = "student_id_student")
+    Student student;
 
 
-    public String id_persona; //One to one con tabla Persona
+
+    public String id_persona;     //One to one con tabla Persona
     public String id_profesor;    //un solo profesor por estudiante
-
 
     public int num_hours_week;
     public String comments;
