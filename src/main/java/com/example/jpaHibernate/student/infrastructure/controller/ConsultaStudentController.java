@@ -41,41 +41,41 @@ public class ConsultaStudentController {
 
     }
 
-
-
-
-
-
-
     /*
       Dependiendo de si han informado parámetro opcional "outputType", retorna un Dto con:
        - Datos del estudiante (si parámetro es "simple" o viene sin informar
        - Datos del estudiante y de la persona asociada (si el parámetro es "full")
      */
+
     @RequestMapping(value = {"/student/id/{idStudent}",
-                             "/student/id/{idStudent}?{outputType}"}, method = RequestMethod.GET)
+            "/student/id/{idStudent}?{infoAdicional}?{outputType}"}, method = RequestMethod.GET)
     public DtoRetorno escogerSimpleFull(Parametros parametros) throws Exception {
 
+        System.out.println("InfoAdicional: " + parametros.getInfoAdicional());
+        System.out.println("OutputType   : " + parametros.getOutputType());
         String outputType = (parametros.getOutputType() == null ||
-                             parametros.getOutputType().equals("simple")) ? "simple" : "full";
+                parametros.getOutputType().equals("simple")) ? "simple" : "full";
 
         Student studentBuscado = buscarStudent.buscarStudentId(parametros.getIdStudent()); //FetchById
         Persona persona = studentBuscado.getPersona();
 
-        if (outputType.equals("simple"))
-        {
-            DtoRetorno miDtoretorno =  simple(studentBuscado);
-            return  miDtoretorno;
+        if (outputType.equals("simple")) {
+            DtoRetorno miDtoretorno = simple(studentBuscado);
+            return miDtoretorno;
         }
-        else
-        {
+
+        if (outputType.equals("full")) {
             DtoRetorno miDtoretorno = full(studentBuscado, persona);
             return miDtoretorno;
         }
 
+
+
+
+
+
+        return new DtoRetorno();
     }
-
-
 
 
     public DtoRetorno simple(Student studentBuscado) {  //Sólo datos del estudiante
@@ -90,5 +90,6 @@ public class ConsultaStudentController {
         DtoRetorno dtoRetorno = studentService.crearDtoFull(studentBuscado, persAsociada);
         return dtoRetorno;
     }
+
 
 }

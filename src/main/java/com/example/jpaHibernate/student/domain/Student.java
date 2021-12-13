@@ -43,13 +43,13 @@ public class Student  {
     public String id_student;
 
 
-   @OneToOne(fetch = FetchType.EAGER)
+   @OneToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "id_persona", insertable = false, updatable = false)
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    Persona persona;
 
-
-   @OneToOne(fetch = FetchType.EAGER)
+   // ver si es many to one
+   @OneToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "id_profesor" , insertable = false, updatable = false)
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    Profesor profesor;
@@ -57,9 +57,17 @@ public class Student  {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_student")
     public List<StudentAsignature> Studentasignaturas;
-    @ManyToOne
-    @JoinColumn(name = "student_id_student")
-    Student student;
+
+
+
+    //------------ ver si sobra
+   //@ManyToOne
+   // @JoinColumn(name = "student_id_student")
+   // Student student;
+
+   // @ManyToOne()
+    //@JoinColumn(name = "profesor1_id_profesor")
+   // public Profesor profesor1;
 
 
 

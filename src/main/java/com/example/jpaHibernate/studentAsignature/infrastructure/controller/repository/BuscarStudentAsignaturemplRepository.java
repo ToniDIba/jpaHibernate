@@ -21,6 +21,9 @@ public class BuscarStudentAsignaturemplRepository implements IBuscarStudentAsig 
     @Autowired
     IstudentAsignatureRepositorio studentAsignatureRepositorio;
 
+    @Autowired
+    IstudentRepositorio studentRepositorio;
+
 
     StudentAsignature studentAsignature = new StudentAsignature();
     //Persona personaBuscada = new Persona();
@@ -32,6 +35,17 @@ public class BuscarStudentAsignaturemplRepository implements IBuscarStudentAsig 
         studentAsignature = studentAsignatureRepositorio.findById(studentAsignature.id_student).orElseThrow(() -> new NotFoundExceptionToni("Student asignatura. No encuentro id: " + id));
         return studentAsignature;
     }
+
+    @Override
+    public String buscarPersAsociada(String id_asignatura) {
+       StudentAsignature asignatura = studentAsignatureRepositorio.findById(id_asignatura).orElseThrow(() -> new NotFoundExceptionToni("Student asignatura. No encuentro id: " + id_asignatura));
+       String estudianteAsignatura = asignatura.id_student; //retorna STUD-001, por ejemplo
+       Student estudiante = studentRepositorio.findById(estudianteAsignatura).get();
+       String personaAsociada = estudiante.getId_persona();
+       return personaAsociada;
+    }
+
+
 
 
 

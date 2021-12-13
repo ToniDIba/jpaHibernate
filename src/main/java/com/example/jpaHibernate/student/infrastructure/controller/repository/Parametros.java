@@ -7,6 +7,9 @@ public class Parametros {
 
 
     public String idStudent;
+    public String idAsignatura;
+    public String idProfesor;
     public String outputType;
+    public String infoAdicional;
 
 }
