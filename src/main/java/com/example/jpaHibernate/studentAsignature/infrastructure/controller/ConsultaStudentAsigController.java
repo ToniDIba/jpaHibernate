@@ -29,7 +29,8 @@ public class ConsultaStudentAsigController {
     @Autowired
     IBuscarPersona buscarPersona;
 
-    IpersonaRepositorio personaRepositorio;
+    //@Autowired
+    //IpersonaRepositorio personaRepositorio;
 
 
    // @GetMapping("/studentAsig/id/{idAsignatura}")
@@ -41,12 +42,14 @@ public class ConsultaStudentAsigController {
 
 
 
-        if (parametros.getInfoAdicional() != null && parametros.getInfoAdicional().toUpperCase().equals("BORRAR=S"))
+        if (parametros.getInfoAdicional() != null && parametros.getInfoAdicional().toUpperCase().equals("BORRARS"))
         {
             String estudianteDeLaAsignatura = buscarStudentAsig.buscarPersAsociada(parametros.idAsignatura); //STUD-001
-            String  id_persona = buscarStudentAsig.buscarPersAsociada(estudianteDeLaAsignatura); //Idpersona=3
-            Persona miPersona = buscarPersona.buscarPersonaId(id_persona); //busco persona 3
-            personaRepositorio.delete(miPersona); //borro persona 3
+            //String  id_persona = buscarStudentAsig.buscarPersAsociada(estudianteDeLaAsignatura); //Idpersona=3
+            Persona miPersona = buscarPersona.buscarPersonaId(estudianteDeLaAsignatura); //busco persona 3
+
+
+           //personaRepositorio.delete(miPersona); //borro persona 3
 
             StudentAsignature sa = new StudentAsignature();
             sa.setComments("Persona borrada");
