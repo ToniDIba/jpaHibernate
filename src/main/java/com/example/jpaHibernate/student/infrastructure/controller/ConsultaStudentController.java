@@ -56,6 +56,7 @@ public class ConsultaStudentController {
         String outputType = (parametros.getOutputType() == null ||
                 parametros.getOutputType().equals("simple")) ? "simple" : "full";
 
+
         Student studentBuscado = buscarStudent.buscarStudentId(parametros.getIdStudent()); //FetchById
         Persona persona = studentBuscado.getPersona();
 
@@ -68,10 +69,6 @@ public class ConsultaStudentController {
             DtoRetorno miDtoretorno = full(studentBuscado, persona);
             return miDtoretorno;
         }
-
-
-
-
 
 
         return new DtoRetorno();

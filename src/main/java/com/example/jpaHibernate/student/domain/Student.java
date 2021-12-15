@@ -5,6 +5,7 @@ import com.example.jpaHibernate.persona.domain.Persona;
 import com.example.jpaHibernate.profesor.domain.Profesor;
 import com.example.jpaHibernate.student.infrastructure.controller.StringPrefixedSequenceIdGenerator;
 import com.example.jpaHibernate.studentAsignature.domain.StudentAsignature;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.HibernateException;
@@ -27,7 +28,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Student  {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_student")
@@ -43,32 +44,31 @@ public class Student  {
     public String id_student;
 
 
-   @OneToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "id_persona", insertable = false, updatable = false)
-   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-   Persona persona;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @JoinColumn(name = "id_persona", insertable = false, updatable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    Persona persona;
 
-   // ver si es many to one
-   @OneToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "id_profesor" , insertable = false, updatable = false)
-   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-   Profesor profesor;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_profesor", insertable = false, updatable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    Profesor profesor;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_student")
     public List<StudentAsignature> Studentasignaturas;
 
 
-
     //------------ ver si sobra
-   //@ManyToOne
-   // @JoinColumn(name = "student_id_student")
-   // Student student;
+    //@ManyToOne
+    // @JoinColumn(name = "student_id_student")
+    // Student student;
 
-   // @ManyToOne()
+    // @ManyToOne()
     //@JoinColumn(name = "profesor1_id_profesor")
-   // public Profesor profesor1;
-
+    // public Profesor profesor1;
 
 
     public String id_persona;     //One to one con tabla Persona
@@ -77,7 +77,6 @@ public class Student  {
     public int num_hours_week;
     public String comments;
     public String branch;      //not null (Front / Back / Full)
-
 
 
 }

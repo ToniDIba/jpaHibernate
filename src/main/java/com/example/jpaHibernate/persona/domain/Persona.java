@@ -3,6 +3,7 @@ package com.example.jpaHibernate.persona.domain;
 import com.example.jpaHibernate.student.domain.Student;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,4 +28,10 @@ public class Persona {
     public String imagen_url;
     public Date termination_date;
 
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_persona")
+    Student student;
+
 }
+

@@ -41,6 +41,9 @@ public class ConsultaProfesorController {
     //public DtoProfesorStudent consultaPorId(@PathVariable("idProfesor") String idProfesor) throws Exception
     // {
 
+
+    // http://localhost:8085/profesor/id/PROF-001
+
     //@RequestMapping(value = {"/profesor/id/{idProfesor}"}, method = RequestMethod.GET)
     @RequestMapping(value = {"/profesor/id/{idProfesor}",
             "/profesor/id/{idProfesor}?{infoAdicional}"}, method = RequestMethod.GET)
