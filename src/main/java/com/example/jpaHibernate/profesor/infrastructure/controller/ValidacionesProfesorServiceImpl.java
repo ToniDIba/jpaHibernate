@@ -18,7 +18,7 @@ public class ValidacionesProfesorServiceImpl implements IvalidacionesProfesorSer
 
         String resu = "Ok";
 
-        System.out.println("id_persona : " + profesor.getId_persona());
+        System.out.println("id_persona : " + profesor.getId_personprof());
         System.out.println("id_profesor: " + profesor.getId_profesor());
 
 

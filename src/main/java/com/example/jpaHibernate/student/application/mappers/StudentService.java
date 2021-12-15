@@ -15,9 +15,9 @@ public class StudentService implements IStudentService {
 
         DtoStudentProfesor salidaDtoSp = new DtoStudentProfesor();
 
-        salidaDtoSp.setPf_id_persona(pf.getId_persona());
+        salidaDtoSp.setPf_id_persona(pf.getId_personprof());
         salidaDtoSp.setPf_id_profesor(pf.getId_profesor());
-        salidaDtoSp.setSt_id_persona(st.getId_persona());
+        salidaDtoSp.setSt_id_persona(st.getId_personstd());
         salidaDtoSp.setSt_id_student(st.getId_student());
         salidaDtoSp.setPf_asignatura(pf.getAsignatura());
         salidaDtoSp.setPf_comments(pf.getComments());
@@ -40,7 +40,7 @@ public class StudentService implements IStudentService {
         salidaDtoSimple.setSt_num_hours_week(st.getNum_hours_week());
         salidaDtoSimple.setSt_id_profesor(st.getId_profesor());
         salidaDtoSimple.setSt_id_student(st.getId_student());
-        salidaDtoSimple.setSt_id_persona(st.getId_persona());
+        salidaDtoSimple.setSt_id_persona(st.getId_personstd());
 
         return salidaDtoSimple;
     }
@@ -57,7 +57,7 @@ public class StudentService implements IStudentService {
         salidaDtoFull.setSt_num_hours_week(st.getNum_hours_week());
         salidaDtoFull.setSt_id_profesor(st.getId_profesor());
         salidaDtoFull.setSt_id_student(st.getId_student());
-        salidaDtoFull.setSt_id_persona(st.getId_persona());
+        salidaDtoFull.setSt_id_persona(st.getId_personstd());
 
         salidaDtoFull.setPers_usuario(pers.getUsuario());
         salidaDtoFull.setPers_password(pers.getPassword());

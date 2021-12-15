@@ -7,7 +7,7 @@ public interface IBuscarStudentAsig {
     //Cumplimentar la clase ...ExceptionHandler
     public StudentAsignature buscarStudentAsignatureId(String id_student) throws Exception;
 
-    public String           buscarPersAsociada(String id_asignatura);
+    public int           buscarPersAsociada(String id_asignatura);
     //public StudentAsignature buscarStudentAsignature(String name) throws Exception;;
 
 }

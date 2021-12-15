@@ -18,7 +18,7 @@ public class ValidacionesPersServiceImpl implements IvalidacionesService {
 
         String resu = "ok";
 
-        System.out.println("id_persona : " + pers.getId_persona());
+        System.out.println("id_persona : " + pers.getId_personpers());
         System.out.println("city : " + pers.getCity());
         System.out.println("company_email: " + pers.getCompany_email());
         System.out.println("created_date: " + pers.getCreated_date());
@@ -70,7 +70,7 @@ public class ValidacionesPersServiceImpl implements IvalidacionesService {
 
         Persona personaOut = new Persona();
 
-        personaOut.setId_persona(inputDto.getId_persona());
+        personaOut.setId_personpers(inputDto.getId_personapers());
         personaOut.setUsuario(inputDto.getUsuario());
         personaOut.setPassword(inputDto.getPassword());
         personaOut.setName(inputDto.getName());

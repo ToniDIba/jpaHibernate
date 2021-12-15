@@ -37,7 +37,7 @@ public class Profesor {
     @JoinColumn(name = "id_profesor")
     private List<Student> student;
 
-    public String id_persona; //One to one con tabla Persona
+    public int id_personprof; //One to one con tabla Persona
     public String comments;
     public String asignatura;
 

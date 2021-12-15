@@ -37,11 +37,11 @@ public class BuscarStudentAsignaturemplRepository implements IBuscarStudentAsig 
     }
 
     @Override
-    public String buscarPersAsociada(String id_asignatura) {
+    public int buscarPersAsociada(String id_asignatura) {
        StudentAsignature asignatura = studentAsignatureRepositorio.findById(id_asignatura).orElseThrow(() -> new NotFoundExceptionToni("Student asignatura. No encuentro id: " + id_asignatura));
        String estudianteAsignatura = asignatura.id_student; //retorna STUD-001, por ejemplo
        Student estudiante = studentRepositorio.findById(estudianteAsignatura).get();
-       String personaAsociada = estudiante.getId_persona();
+       int personaAsociada = estudiante.getId_personstd();
        return personaAsociada;
     }
 

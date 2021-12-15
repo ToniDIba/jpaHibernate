@@ -61,7 +61,7 @@ public class ConsultaProfesorController {
         //Student student = profesorBuscado.getStudent();
         List<Student> miLista = profesorBuscado.getStudent();
 
-        String id_persona = profesorBuscado.getId_persona();
+        int id_persona = profesorBuscado.getId_personprof();
         Persona miPersona = buscarPersona.buscarPersonaId(id_persona);
         // List<StudentAsignature> listAsignaturas = miLista.getStudentasignaturas();
 

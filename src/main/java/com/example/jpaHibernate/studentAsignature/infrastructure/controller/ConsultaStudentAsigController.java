@@ -44,7 +44,7 @@ public class ConsultaStudentAsigController {
 
         if (parametros.getInfoAdicional() != null && parametros.getInfoAdicional().toUpperCase().equals("BORRARS"))
         {
-            String estudianteDeLaAsignatura = buscarStudentAsig.buscarPersAsociada(parametros.idAsignatura); //STUD-001
+            int estudianteDeLaAsignatura = buscarStudentAsig.buscarPersAsociada(parametros.idAsignatura); //STUD-001
             Persona miPersona = buscarPersona.buscarPersonaId(estudianteDeLaAsignatura); //busco persona 3
 
             personaRepositorio.delete(miPersona);

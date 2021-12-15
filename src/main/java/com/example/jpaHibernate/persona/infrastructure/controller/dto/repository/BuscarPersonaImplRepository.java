@@ -24,10 +24,10 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
 
 
     @Override
-    public Persona buscarPersonaId(String id) throws Exception  //Busca por número id
+    public Persona buscarPersonaId(int id) throws Exception  //Busca por número id
     {
-        //pers = personaRepositorio.findById(Integer.parseInt(id)).orElseThrow(() -> new NotFoundExceptionToni("No encuentro id: " + id));
-        pers = personaRepositorio.findById(3).orElseThrow(() -> new NotFoundExceptionToni("No encuentro id: " + id));
+        pers = personaRepositorio.findById(id).orElseThrow(() -> new NotFoundExceptionToni("No encuentro id: " + id));
+        //pers = personaRepositorio.findById(3).orElseThrow(() -> new NotFoundExceptionToni("No encuentro id: " + id));
         return pers;
     }
 

@@ -18,7 +18,7 @@ public class ValidacionesStudentServiceImpl implements IvalidacionesStudentServi
 
         String resu = "Ok";
 
-        System.out.println("id_persona : " + student.getId_persona());
+        System.out.println("id_persona : " + student.getId_personstd());
         System.out.println("id_student: " + student.getId_student());
         System.out.println("id_profe: " + student.getId_profesor());
         System.out.println("horas: " + student.getNum_hours_week());

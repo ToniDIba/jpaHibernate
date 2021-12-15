@@ -1,5 +1,6 @@
-
-    "id_persona": 1,
+[
+{
+    "id_personp": 1,
     "usuario": "usuario1",
     "password": "pass1",
     "name": "Toni",
@@ -12,7 +13,8 @@
     "imagen_url": "https://spring.io11111/",
     "termination_date": "2021-06-01T00:00:00.000+00:00"
 
-
+},
+{
     "id_persona": 2,
     "usuario": "usuario2",
     "password": "pass2",
@@ -25,7 +27,8 @@
     "created_date": "2021-02-02T00:00:00.000+00:00",
     "imagen_url": "https://spring.io22222/",
     "termination_date": "2021-06-02T00:00:00.000+00:00"
-
+},
+{
 
     "id_persona": 3,
     "usuario": "usuario3",
@@ -39,8 +42,8 @@
     "created_date": "2021-03-03T00:00:00.000+00:00",
     "imagen_url": "https://spring.io33333/",
     "termination_date": "2021-06-03T00:00:00.000+00:00"
-
-
+},
+{
     "id_persona": 4,
     "usuario": "usuario4",
     "password": "pass4",
@@ -53,7 +56,8 @@
     "created_date": "2021-04-04T00:00:00.000+00:00",
     "imagen_url": "https://spring.io44444/",
     "termination_date": "2021-06-04T00:00:00.000+00:00"
-
+},
+{
 
     "id_persona": 5,
     "usuario": "usuario5",
@@ -67,3 +71,19 @@
     "created_date": "2021-05-05T00:00:00.000+00:00",
     "imagen_url": "https://spring.io55555/",
     "termination_date": "2021-06-05T00:00:00.000+00:00"
+
+},
+{
+    "id_persona": 6,
+    "usuario": "usuario6",
+    "password": "pass6",
+    "name": "Marga",
+    "surname": "Quilega",
+    "company_email": "empe6@gmail.com",
+    "personal_email": "nombre6@gmail.com",
+    "city": "Terranova",
+    "active": false,
+    "created_date": "2026-02-02T00:00:00.000+00:00",
+    "imagen_url": "https://spring.io22222/",
+    "termination_date": "2026-06-02T00:00:00.000+00:00"
+    }]

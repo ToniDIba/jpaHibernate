@@ -19,7 +19,7 @@ public class ProfesorService implements IprofesorService {
         DtoProfesorStudent salidaDtoPs = new DtoProfesorStudent();
 
         salidaDtoPs.setPf_id_profesor(pf.getId_profesor());
-        salidaDtoPs.setPf_id_persona(pf.getId_persona());
+        salidaDtoPs.setPf_id_persona(pf.getId_personprof());
         salidaDtoPs.setPf_comments(pf.getComments());
         salidaDtoPs.setPf_asignatura(pf.getAsignatura());
         salidaDtoPs.setSt_studentList(st);
@@ -35,13 +35,13 @@ public class ProfesorService implements IprofesorService {
         DtoProfesorStudent salidaDtoPs = new DtoProfesorStudent();
 
         salidaDtoPs.setPf_id_profesor(pf.getId_profesor());
-        salidaDtoPs.setPf_id_persona(pf.getId_persona());
+        salidaDtoPs.setPf_id_persona(pf.getId_personprof());
         salidaDtoPs.setPf_comments(pf.getComments());
         salidaDtoPs.setPf_asignatura(pf.getAsignatura());
 
         salidaDtoPs.setSt_studentList(st);
 
-        salidaDtoPs.setPers_id_persona(pers.getId_persona());
+        salidaDtoPs.setPers_id_persona(pers.getId_personpers());
         salidaDtoPs.setPers_usuario(pers.getUsuario());
         salidaDtoPs.setPers_password(pers.getPassword());
         salidaDtoPs.setPers_name(pers.getName());

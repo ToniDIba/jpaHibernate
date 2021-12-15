@@ -10,7 +10,7 @@ import java.util.List;
 public class DtoProfesorStudent {
 
     public String pf_id_profesor;
-    public String pf_id_persona;
+    public int pf_id_persona;
     public String pf_comments;
     public String pf_asignatura;
 

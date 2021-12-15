@@ -46,7 +46,7 @@ public class Student {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    @JoinColumn(name = "id_persona", insertable = false, updatable = false)
+    @JoinColumn(name = "id_personpers", insertable = false, updatable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     Persona persona;
 
@@ -71,7 +71,7 @@ public class Student {
     // public Profesor profesor1;
 
 
-    public String id_persona;     //One to one con tabla Persona
+    public int id_personstd;     //One to one con tabla Persona
     public String id_profesor;    //un solo profesor por estudiante
 
     public int num_hours_week;

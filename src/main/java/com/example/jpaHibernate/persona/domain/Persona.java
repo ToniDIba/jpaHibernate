@@ -14,7 +14,7 @@ public class Persona {
 
     @GeneratedValue
     @Id
-    public int id_persona;
+    public int id_personpers;
 
     public String usuario;
     public String password;
@@ -30,7 +30,7 @@ public class Persona {
 
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_persona")
+    @JoinColumn(name = "id_personstd")
     Student student;
 
 }

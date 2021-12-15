@@ -29,7 +29,7 @@ public class ConsultaPersonaController {
 
 
         if(isNumeric(claveBusqueda)) {
-             persBuscada = buscarPersona.buscarPersonaId(claveBusqueda); //Busca por id numérico
+             persBuscada = buscarPersona.buscarPersonaId(Integer.parseInt(claveBusqueda)); //Busca por id numérico
         }
         else {
             persBuscada = buscarPersona.buscarPersona(claveBusqueda);  //Busca por nombre persona

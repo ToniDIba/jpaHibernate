@@ -18,18 +18,18 @@
     
     
     {
-      
-        "id_persona": "4",
+
+        "id_personstd": "4",
         "num_hours_week": 40,
         "comments": "No comment 2",
         "id_profesor": "PROF-001",
         "branch": "HalfStack"
 
+}
 
 
-
-
-               "id_persona": "5",
+{
+               "id_personstd": "5",
                 "num_hours_week": 25,
                 "comments": "No comment studnt 3",
                 "id_profesor": "PROF-002",
