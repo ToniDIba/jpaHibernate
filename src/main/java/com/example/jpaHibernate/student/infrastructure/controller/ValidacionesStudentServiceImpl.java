@@ -4,8 +4,10 @@ import com.example.jpaHibernate.persona.domain.Persona;
 import com.example.jpaHibernate.persona.infrastructure.controller.dto.input.InputDto;
 import com.example.jpaHibernate.student.application.port.IvalidacionesStudentService;
 import com.example.jpaHibernate.student.domain.Student;
+import com.example.jpaHibernate.studentAsignature.domain.StudentAsignature;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -64,6 +66,45 @@ public class ValidacionesStudentServiceImpl implements IvalidacionesStudentServi
         } else {
             return nombreBuscado;
         }
+
+    }
+
+    @Override
+    public ArrayList<StudentAsignature> extraerAsignaturaLista(ArrayList<StudentAsignature> miArray) {
+
+        StudentAsignature nuevaAsignatura = new StudentAsignature();
+        ArrayList<StudentAsignature> asignaturas = new ArrayList<StudentAsignature>();
+
+        for (StudentAsignature l : miArray) {
+
+            //nuevaAsignatura.setId_asignatura(l.getId_asignatura());
+            //nuevaAsignatura.setId_student(l.getId_student());
+            //nuevaAsignatura.setNombreAsignatura(l.getNombreAsignatura());
+            //nuevaAsignatura.setComments(l.getComments());
+            //nuevaAsignatura.setInitial_date(l.getInitial_date());
+
+            System.out.println(l.getId_student());
+            System.out.println(l.getNombreAsignatura());
+            System.out.println(l.getComments());
+            System.out.println(l.getId_asignatura());
+            System.out.println(l.getInitial_date());
+            System.out.println(l.getFinish_date());
+
+            asignaturas.add( new StudentAsignature(l.getId_asignatura(),
+                                                   l.getId_student(),
+                                                   l.getNombreAsignatura(),
+                                                   l.getComments(),
+                                                   l.getInitial_date(),
+                                                   l.getFinish_date()) );
+
+        }
+
+
+        System.out.println("Value list: " + miArray);
+
+        return asignaturas;
+
+
 
     }
 }

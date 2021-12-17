@@ -1,6 +1,6 @@
 [
 {
-    "id_personp": 1,
+    "id_personpers": 1,
     "usuario": "usuario1",
     "password": "pass1",
     "name": "Toni",
@@ -15,7 +15,7 @@
 
 },
 {
-    "id_persona": 2,
+    "id_personpers": 2,
     "usuario": "usuario2",
     "password": "pass2",
     "name": "María",
@@ -30,7 +30,7 @@
 },
 {
 
-    "id_persona": 3,
+    "id_personpers": 3,
     "usuario": "usuario3",
     "password": "pass3",
     "name": "Sergio",
@@ -44,7 +44,7 @@
     "termination_date": "2021-06-03T00:00:00.000+00:00"
 },
 {
-    "id_persona": 4,
+    "id_personpers": 4,
     "usuario": "usuario4",
     "password": "pass4",
     "name": "Carla",
@@ -59,7 +59,7 @@
 },
 {
 
-    "id_persona": 5,
+    "id_personpers": 5,
     "usuario": "usuario5",
     "password": "pass5",
     "name": "Manel",
@@ -74,7 +74,7 @@
 
 },
 {
-    "id_persona": 6,
+    "id_personpers": 6,
     "usuario": "usuario6",
     "password": "pass6",
     "name": "Marga",

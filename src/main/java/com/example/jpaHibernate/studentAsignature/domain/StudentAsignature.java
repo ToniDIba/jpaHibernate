@@ -14,6 +14,25 @@ import java.util.Date;
 @Data
 public class StudentAsignature  {
 
+    public StudentAsignature() {  }
+
+    public StudentAsignature( String id_asignatura,
+            String id_student,
+            String nombreAsignatura,
+            String comments,
+            Date initial_date,
+            Date finish_date)
+    {
+
+        this.id_asignatura = id_asignatura;
+        this.id_student = id_student;
+        this.nombreAsignatura = nombreAsignatura;
+        this.comments = comments;
+        this.initial_date = initial_date;
+        this.finish_date = finish_date;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_asignatura")
     @GenericGenerator(
@@ -43,7 +62,7 @@ public class StudentAsignature  {
 
 
     public String id_student;
-    String nombreAsignatura; // html, spring...
+    String nombreAsignatura;
     String comments;
     Date initial_date;
     Date finish_date;
