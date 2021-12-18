@@ -16,6 +16,8 @@ import com.example.jpaHibernate.student.infrastructure.controller.repository.Bus
 import com.example.jpaHibernate.student.infrastructure.controller.repository.Parametros;
 import com.example.jpaHibernate.studentAsignature.domain.StudentAsignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,33 +39,21 @@ public class ConsultaProfesorController {
     BuscarStudentImplRepository buscarStudentImplRepository;
 
 
-    //@GetMapping("/profesor/id/{idProfesor}")
-    //public DtoProfesorStudent consultaPorId(@PathVariable("idProfesor") String idProfesor) throws Exception
-    // {
-
-
-    // http://localhost:8085/profesor/id/PROF-001
-
-    //@RequestMapping(value = {"/profesor/id/{idProfesor}"}, method = RequestMethod.GET)
     @RequestMapping(value = {"/profesor/id/{idProfesor}",
             "/profesor/id/{idProfesor}?{infoAdicional}"}, method = RequestMethod.GET)
 
-    public DtoProfesorStudent consultaPorId(Parametros parametros) throws Exception {
+      //public DtoProfesorStudent consultaPorId(Parametros parametros) throws Exception {
+        public  ResponseEntity<DtoProfesorStudent> consultaPorId(Parametros parametros) throws Exception {
 
+        //System.out.println("InfoAdicional: " + parametros.getInfoAdicional());
+        System.out.println("IdProfesor   : " + parametros.idProfesor);
         DtoProfesorStudent miDto = new DtoProfesorStudent();
 
-        System.out.println("InfoAdicional: " + parametros.getInfoAdicional());
-        System.out.println("IdProfesor   : " + parametros.idProfesor);
-
-        System.out.println("entra " + parametros.idProfesor);
-
         Profesor profesorBuscado = buscarProfesor.buscarProfesorId(parametros.idProfesor);
-        //Student student = profesorBuscado.getStudent();
         List<Student> miLista = profesorBuscado.getStudent();
 
         int id_persona = profesorBuscado.getId_personprof();
         Persona miPersona = buscarPersona.buscarPersonaId(id_persona);
-        // List<StudentAsignature> listAsignaturas = miLista.getStudentasignaturas();
 
         if (parametros.getInfoAdicional() != null && parametros.getInfoAdicional().toUpperCase().equals("S"))
         {
@@ -72,13 +62,10 @@ public class ConsultaProfesorController {
             miDto = profesorService.convertirDtoPs(profesorBuscado, miLista);
         }
 
-        return miDto;
-
+        //return miDto;
+        System.out.println("Hago return REsponseEntity");
+        return ResponseEntity.status(HttpStatus.OK).body(miDto);
 
     }
 
-
 }
-
-
-//@RequestMapping(value = {"/student/previo/id/{idStudent}"}, method = RequestMethod.GET)

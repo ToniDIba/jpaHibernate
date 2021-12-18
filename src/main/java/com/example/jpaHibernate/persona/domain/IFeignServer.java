@@ -13,3 +13,5 @@ public interface IFeignServer {
     ResponseEntity<String> callServer(@PathVariable("id") int httpcode);
 
 }
+
+
