@@ -46,7 +46,7 @@ public class ConsultaProfesorController {
         public  ResponseEntity<DtoProfesorStudent> consultaPorId(Parametros parametros) throws Exception {
 
         //System.out.println("InfoAdicional: " + parametros.getInfoAdicional());
-        System.out.println("IdProfesor   : " + parametros.idProfesor);
+        System.out.println("IdProfesorPROVAl  : " + parametros.idProfesor);
         DtoProfesorStudent miDto = new DtoProfesorStudent();
 
         Profesor profesorBuscado = buscarProfesor.buscarProfesorId(parametros.idProfesor);
