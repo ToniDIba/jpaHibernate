@@ -33,7 +33,7 @@
     "id_personpers": 3,
     "usuario": "usuario3",
     "password": "pass3",
-    "name": "Sergio",
+    "name": "Toni",
     "surname": "Martín",
     "company_email": "empe3@gmail.com",
     "personal_email": "nombre3@gmail.com",

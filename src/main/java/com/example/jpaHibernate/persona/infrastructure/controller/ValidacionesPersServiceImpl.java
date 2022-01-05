@@ -1,5 +1,6 @@
 package com.example.jpaHibernate.persona.infrastructure.controller;
 
+import com.example.jpaHibernate.persona.domain.Parametros;
 import com.example.jpaHibernate.persona.domain.Persona;
 import com.example.jpaHibernate.persona.application.port.IvalidacionesService;
 import com.example.jpaHibernate.persona.infrastructure.controller.dto.input.InputDto;
@@ -111,4 +112,12 @@ public class ValidacionesPersServiceImpl implements IvalidacionesService {
         }
 
     }
+
+    @Override
+    public void comprobarName(String nombre, Parametros params) {
+
+        params.setName(nombre);
+    }
+
+
 }
