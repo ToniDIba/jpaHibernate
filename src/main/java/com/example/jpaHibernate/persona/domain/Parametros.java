@@ -16,6 +16,7 @@ public class Parametros {
     public String fechalow;
 
     public String ordenarpor;
+    public int primerRegARecuperar;
 
 
 

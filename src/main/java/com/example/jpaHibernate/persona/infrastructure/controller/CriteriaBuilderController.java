@@ -13,23 +13,27 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-//    http://localhost:8085/criteriabuild/columnas?surname=López&user=usuario1&name=Toni&fechalow=2020-12-31 00:00:00&ordenarpor=usuario&fechahigh=2021-01-10 00:00:00
+// http://localhost:8085/criteriabuild/columnas?surname=López&user=1&fechahigh=2005-06-01 00:00:00&fechalow=2027-07-01 00:00:00&ordenarpor=user&name=Toni&primerRegARecuperar=8
+
+
 
 
 @RestController
 @RequestMapping("/criteriabuild")
-public class CriteriaBuilderController {
+public class CriteriaBuilderController
+{
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @RequestMapping(value = {"/columnas",
                              "/columnas/{user}",
-                             "/columnas/{user} ? {name} ? {surname} ? {fechahigh} ? {fechalow} ? {ordenarpor} "}, method = RequestMethod.GET)
+                             "/columnas/{user} ? {name} ? {surname} ? {fechahigh} ? {fechalow} ? {ordenarpor} ? {primerRegARecuperar}"}, method = RequestMethod.GET)
 
 
     public List seleccionarPersonas(Parametros params) throws ParseException {
 
+        System.out.println("User   : " + params.getPrimerRegARecuperar());
 
         //Convierte parámetro entrada fechaDesde / fechaHasta a un "Date"
         Date ParamFechaHasta = stringADate(params.getFechahigh());
@@ -49,6 +53,9 @@ public class CriteriaBuilderController {
 
     //Select sobre tabla "Persona", para retornar las que cumplan el "Where"
     public List<Persona> getData(HashMap<String, Object> condicionesWhere, Parametros params) {
+
+        int primerRegARecuperar = params.getPrimerRegARecuperar() - 1;
+        int numFilasMostrar = 3;
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Persona> query = cb.createQuery(Persona.class);
@@ -92,16 +99,19 @@ public class CriteriaBuilderController {
 
         if (condiciones.size() == 0) return new ArrayList<Persona>(); //El "WHERE" está vacío. Retorno nada
 
-
         query.select(root).where(condiciones.toArray(new Predicate[condiciones.size()]));
-        if(params.getOrdenarpor() != null) query.orderBy(cb.asc(root.get(params.getOrdenarpor())));
-        //query.orderBy(cb.desc(root.get(params.getOrdenarpor())));
-        return entityManager.createQuery(query).getResultList();
+        if (params.getOrdenarpor() != null) query.orderBy(cb.asc (root.get(params.getOrdenarpor())));  //Ascending
+        //                                  query.orderBy(cb.desc(root.get(params.getOrdenarpor()))); //Descending
+
+
+        List<Persona> personaList = entityManager.createQuery(query)
+                                                 .setMaxResults(numFilasMostrar)
+                                                 .setFirstResult(primerRegARecuperar)
+                                                 .getResultList();
+
+        return personaList;
+
     }
-
-
-
-
 
 
     // Parejas(Columna - Valor) para el "Where"
@@ -115,6 +125,7 @@ public class CriteriaBuilderController {
         System.out.println("Fecha h: " + params.getFechahigh());
         System.out.println("Fecha l: " + params.getFechalow());
         System.out.println("Orden x: " + params.getOrdenarpor());
+        System.out.println("1er reg a recuperar: " + params.getPrimerRegARecuperar());
 
         hm.put("usuario", params.getUser());
         hm.put("name", params.getName());
@@ -127,15 +138,11 @@ public class CriteriaBuilderController {
     }
 
 
-
-
-
-
     //Formatea a "Date" el String recibido desde PostMan
     private Date stringADate(String fechaIn) throws ParseException {
 
         Date unaFecha = new Date();
-        if(fechaIn == null) unaFecha = null;
+        if (fechaIn == null) unaFecha = null;
 
         if (fechaIn != null) unaFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(fechaIn);
 
@@ -146,18 +153,3 @@ public class CriteriaBuilderController {
 
 }
 
-
-// http://localhost:8085/criteria/parametros/{name}?{surname}?{user}?{fechahigh}?{fechalow}?{ordenarpor}
-
-
-    /*
-        System.out.println("User   : " + params.getUser());
-        System.out.println("Name   : " + params.getName());
-        System.out.println("Surname: " + params.getSurname());
-        System.out.println("Fecha h: " + params.getFechahigh());
-        System.out.println("Fecha l: " + params.getFechalow());
-        System.out.println("Orden x: " + params.getOrdenarpor());
-
-        System.out.println("FechaH: " + fechaHastaIn); //AAAA-MM-DD
-        System.out.println("FechaL: " + fechaDesdeIn); //AAAA-MM-DD
-     */
