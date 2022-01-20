@@ -26,6 +26,8 @@ public class Persona {
     public String company_email;
     public String personal_email;
     public String city;
+
+    public boolean admin;
     public boolean active;
 
     public Date created_date;
@@ -33,9 +35,11 @@ public class Persona {
     public Date termination_date;
 
 
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_personstd")
     Student student;
 
 }
+
 

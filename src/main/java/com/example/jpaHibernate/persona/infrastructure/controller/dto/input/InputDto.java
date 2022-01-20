@@ -14,11 +14,10 @@ public class InputDto {
         public String company_email;
         public String personal_email;
         public String city;
+        public boolean admin;
         public boolean active;
         public Date created_date;
         public String imagen_url;
         public Date termination_date;
-
-
 
     }

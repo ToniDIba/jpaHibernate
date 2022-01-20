@@ -16,7 +16,7 @@ public class FindAllController {
 
 
 
-    @GetMapping("/todos")
+    @GetMapping("/consulta/todos")
     public List<Persona> todasPersonas() {
         return ibuscarTodos.buscarTodos();
 

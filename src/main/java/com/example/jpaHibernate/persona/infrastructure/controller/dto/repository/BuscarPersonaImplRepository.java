@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -20,6 +22,7 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
 
 
     Persona pers = new Persona();
+    List<Persona> misPersonas = new ArrayList();
 
 
 
@@ -36,8 +39,6 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
     @Override
     public Persona buscarPersona(String nombreBuscado)  //Busca por nombre
     {
-
-
 
        /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersonas");
         EntityManager em = emf.createEntityManager();
@@ -56,6 +57,14 @@ public class BuscarPersonaImplRepository implements IBuscarPersona {
 
         //return personaBuscada; original era este
         return pers;
+    }
+
+
+
+    @Override
+    public List<Persona> findPersonaByUsuario(String usuario) {
+        misPersonas = personaRepositorio.findPersonaByUsuario(usuario);
+        return  misPersonas;
     }
 
 

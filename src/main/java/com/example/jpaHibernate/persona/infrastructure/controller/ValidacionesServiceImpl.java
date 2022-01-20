@@ -1,16 +1,31 @@
 package com.example.jpaHibernate.persona.infrastructure.controller;
 
+import com.example.jpaHibernate.persona.application.port.IvalidacionesService;
+import com.example.jpaHibernate.persona.domain.IpersonaRepositorio;
 import com.example.jpaHibernate.persona.domain.Parametros;
 import com.example.jpaHibernate.persona.domain.Persona;
-import com.example.jpaHibernate.persona.application.port.IvalidacionesService;
 import com.example.jpaHibernate.persona.infrastructure.controller.dto.input.InputDto;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
-public class ValidacionesPersServiceImpl implements IvalidacionesService {
+public class ValidacionesServiceImpl implements IvalidacionesService {
+
+    public static String token;
+
+    @Autowired
+    IpersonaRepositorio ipersonaRepositorio;
 
 
     @Override
@@ -79,7 +94,10 @@ public class ValidacionesPersServiceImpl implements IvalidacionesService {
         personaOut.setCompany_email(inputDto.getCompany_email());
         personaOut.setPersonal_email(inputDto.getPersonal_email());
         personaOut.setCity(inputDto.getCity());
-        personaOut.setActive(true);
+
+        personaOut.setActive(inputDto.isActive()); //Boolean
+        personaOut.setAdmin(inputDto.isAdmin()); //Boolean
+
         personaOut.setCreated_date(inputDto.getCreated_date());
         personaOut.setImagen_url(inputDto.getImagen_url());
         personaOut.setTermination_date(inputDto.getTermination_date());
@@ -118,6 +136,55 @@ public class ValidacionesPersServiceImpl implements IvalidacionesService {
 
         params.setName(nombre);
     }
+
+
+
+    @Override
+    public boolean validarPasswordYUsuario(String user, String password) {
+
+        Persona miPersona;
+
+        List<Persona> personaList = new ArrayList<>();
+        personaList = ipersonaRepositorio.findPersonaByUsuario(user);
+        miPersona = personaList.get(0);
+
+        if ((miPersona.getUsuario().equals(user)) && (miPersona.getPassword().equals(password))) {
+            if (miPersona.isAdmin() == true) LoginController.esAdmin = true; // "esAdmin" declarada "static" en "LoginController"
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+    @Override
+    public String getJWTToken(String username) {
+
+        String secretKey = "mySecretKey";
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+
+          //String token = Jwts  <<< "token", declarada static más arriba
+          token = Jwts
+                .builder()
+                .setId("softtekJWT")
+                .setSubject(username)
+                .claim("authorities",
+                        grantedAuthorities.stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+              //.setExpiration(new Date(System.currentTimeMillis() + 990000)) // + 16 minutos
+              //.setExpiration(new Date(System.currentTimeMillis() + 600000)) // + 10 minutos
+                .setExpiration(new Date(System.currentTimeMillis() + 300000)) // + 05 minutos
+                .signWith(SignatureAlgorithm.HS512,
+                        secretKey.getBytes()).compact();
+
+        return "Bearer " + token;
+    }
+
+
 
 
 }

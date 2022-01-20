@@ -17,6 +17,11 @@ public interface IvalidacionesService
     String retornarIdOrName(String idOrName);
 
     void comprobarName(String name, Parametros params);
+
+    boolean validarPasswordYUsuario(String user, String password);
+
+    String getJWTToken(String username);
+
 }
 
 

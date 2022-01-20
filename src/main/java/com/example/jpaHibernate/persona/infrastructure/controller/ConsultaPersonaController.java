@@ -20,13 +20,12 @@ public class ConsultaPersonaController {
     @Autowired
     IBuscarPersona buscarPersona;
 
-    @GetMapping("/id/{idOrName}")
+    @GetMapping("/consulta/id/{idOrName}")
     public Persona consultaPorNombreOrId(@PathVariable String idOrName) throws Exception
     {
         System.out.println("Paso por consultar persona");
         Persona persBuscada = null;
         String claveBusqueda = validacionesService.retornarIdOrName(idOrName);
-
 
         if(isNumeric(claveBusqueda)) {
              persBuscada = buscarPersona.buscarPersonaId(Integer.parseInt(claveBusqueda)); //Busca por id numérico

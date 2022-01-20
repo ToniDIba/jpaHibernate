@@ -19,12 +19,24 @@ public class AddPersonaController {
     IanadirPersona anadirPersona;
 
 
-    @PostMapping("/addPersona")
+    @PostMapping("/add/addPersona")
     public Persona anadirPersona(@RequestBody InputDto inputDto) {
 
-        Persona miPers = validacionesService.mapearInputOutput(inputDto);
-        anadirPersona.anyadirPersona(miPers); //Hace un Repository.add
+        Persona miPers=new Persona();
+
+        System.out.println("                      Token: " + ValidacionesServiceImpl.token);
+        System.out.println("Desde AddPersona. Soy Admin: " + LoginController.esAdmin);
+
+        if(LoginController.esAdmin) {
+            miPers = validacionesService.mapearInputOutput(inputDto);
+            anadirPersona.anyadirPersona(miPers); //Hace un Repository.add
+        } else {
+            miPers.setName("No eres 'Admin'. Sólo puedes hacer consultas");
+        }
+
         return miPers;
+
+
     }
 
 
