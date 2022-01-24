@@ -1,5 +1,6 @@
 package com.example.jpaHibernate.persona.infrastructure.controller;
 
+
 import com.example.jpaHibernate.persona.domain.Persona;
 import com.example.jpaHibernate.persona.application.port.IanadirPersona;
 import com.example.jpaHibernate.persona.application.port.IvalidacionesService;
@@ -18,6 +19,9 @@ public class AddPersonaController {
     @Autowired
     IanadirPersona anadirPersona;
 
+    @Autowired
+    Credentials cr;
+
 
     @PostMapping("/add/addPersona")
     public Persona anadirPersona(@RequestBody InputDto inputDto) {
@@ -25,9 +29,10 @@ public class AddPersonaController {
         Persona miPers=new Persona();
 
         System.out.println("                      Token: " + ValidacionesServiceImpl.token);
-        System.out.println("Desde AddPersona. Soy Admin: " + LoginController.esAdmin);
+        System.out.println("Desde AddPersona. Soy Admin: " + cr.esAdmin);
 
-        if(LoginController.esAdmin) {
+       // if(LoginController.esAdmin) {
+          if(cr.esAdmin) {
             miPers = validacionesService.mapearInputOutput(inputDto);
             anadirPersona.anyadirPersona(miPers); //Hace un Repository.add
         } else {

@@ -18,7 +18,6 @@ public class DeletePersonaController {
     @Autowired
     IBorrarPersona borrarPersona;
 
-
     @Autowired
     IBuscarPersona buscarPersona;
 
@@ -35,6 +34,7 @@ public class DeletePersonaController {
         else {
             persBuscada = borrarPersona.borrarPersona(claveBusqueda);  //Busca por nombre persona para borrarla
         }
+
 
         return persBuscada;
     }

@@ -140,7 +140,7 @@ public class ValidacionesServiceImpl implements IvalidacionesService {
 
 
     @Override
-    public boolean validarPasswordYUsuario(String user, String password) {
+    public boolean validarPasswordYUsuario(String user, String password, Credentials cr) {
 
         Persona miPersona;
 
@@ -148,8 +148,19 @@ public class ValidacionesServiceImpl implements IvalidacionesService {
         personaList = ipersonaRepositorio.findPersonaByUsuario(user);
         miPersona = personaList.get(0);
 
+        //Singleton "Credentials"
+        cr.usuarioValido = false;
+        cr.esAdmin = false;
+
+
         if ((miPersona.getUsuario().equals(user)) && (miPersona.getPassword().equals(password))) {
-            if (miPersona.isAdmin() == true) LoginController.esAdmin = true; // "esAdmin" declarada "static" en "LoginController"
+            //if (miPersona.isAdmin() == true) LoginController.esAdmin = true; // "esAdmin" declarada "static" en "LoginController"
+            if (miPersona.isAdmin() == true)
+            {
+                cr.usuarioValido = true;
+                cr.esAdmin = true;
+            }
+
             return true;
         }
 

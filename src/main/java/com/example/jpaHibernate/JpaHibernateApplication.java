@@ -1,6 +1,7 @@
 package com.example.jpaHibernate;
 
 import com.example.jpaHibernate.persona.domain.Parametros;
+import com.example.jpaHibernate.persona.infrastructure.controller.Credentials;
 import com.example.jpaHibernate.persona.infrastructure.controller.dto.JWTAuthorizationFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

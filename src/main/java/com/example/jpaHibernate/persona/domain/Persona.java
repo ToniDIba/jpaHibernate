@@ -40,6 +40,9 @@ public class Persona {
     @JoinColumn(name = "id_personstd")
     Student student;
 
+
+
+
 }
 
 

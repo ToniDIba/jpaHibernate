@@ -1,6 +1,7 @@
 package com.example.jpaHibernate.persona.application.port;
 
 import com.example.jpaHibernate.persona.domain.Parametros;
+import com.example.jpaHibernate.persona.infrastructure.controller.Credentials;
 import com.example.jpaHibernate.persona.infrastructure.controller.dto.input.InputDto;
 import com.example.jpaHibernate.persona.domain.Persona;
 
@@ -18,7 +19,7 @@ public interface IvalidacionesService
 
     void comprobarName(String name, Parametros params);
 
-    boolean validarPasswordYUsuario(String user, String password);
+    boolean validarPasswordYUsuario(String user, String password, Credentials cr);
 
     String getJWTToken(String username);
 
